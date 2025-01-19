@@ -9,6 +9,7 @@ public partial class CreateSubmission : ContentPage
 	public CreateSubmission()
 	{
 		InitializeComponent();
+        BindingContext = App.schoolMan.SchoolInfo;
     }
 
 

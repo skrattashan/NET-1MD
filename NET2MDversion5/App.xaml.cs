@@ -14,7 +14,9 @@ namespace NET2MDversion5
             schoolMan = new schoolManager(schoolInfo);
             schoolMan.createTestData();
             //schoolMan.addAssignment();
-            BindingContext = schoolInfo;
+            //BindingContext = schoolInfo.Get;
+            //BindingContext = schoolMan;
+            Application.Current.BindingContext = schoolMan.SchoolInfo;
         }
 
         public static schoolManager? schoolMan { get; set; } = new schoolManager(new SchoolInfo()); //es ceru, ka stradas tagad :')

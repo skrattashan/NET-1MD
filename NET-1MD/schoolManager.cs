@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace NET_1MD
         public schoolManager(SchoolInfo schoolinfo)
         {
             _schoolinfo = schoolinfo;
+        }
+        public SchoolInfo SchoolInfo
+        {
+            get { return _schoolinfo; }
         }
         //public void print()
         //{
@@ -121,8 +126,42 @@ namespace NET_1MD
         }
         public void createTestData()
         {
-            _schoolinfo = new SchoolInfo();
+            if (_schoolinfo == null) //initialize schoolinfo if it is null
+            {
+                _schoolinfo = new SchoolInfo();
+            }
+            //_schoolinfo = new SchoolInfo();
+            var testData = SchoolInfo.GetTestData();
 
+            // Add students one by one
+            foreach (var student in testData.Students)
+            {
+                _schoolinfo.Students.Add(student);
+            }
+
+            // Add teachers one by one
+            foreach (var teacher in testData.Teachers)
+            {
+                _schoolinfo.Teachers.Add(teacher);
+            }
+
+            // Add courses one by one
+            foreach (var course in testData.Courses)
+            {
+                _schoolinfo.Courses.Add(course);
+            }
+
+            // Add assignments one by one
+            foreach (var assignment in testData.Assignments)
+            {
+                _schoolinfo.Assignments.Add(assignment);
+            }
+
+            // Add submissions one by one
+            foreach (var submission in testData.Submissions)
+            {
+                _schoolinfo.Submissions.Add(submission);
+            }
         }
         public void reset()
         {
@@ -138,7 +177,7 @@ namespace NET_1MD
             _schoolinfo.Students.Add(new Student(name, surname, gender, studentIDNumber));
         }
 
-        public List<Student> getStudents() //man nestradaja _schoolinfo var jo private
+        public ObservableCollection<Student> getStudents() //man nestradaja _schoolinfo var jo private
         {
             return _schoolinfo.Students;
         }

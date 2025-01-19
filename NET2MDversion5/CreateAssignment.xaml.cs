@@ -6,7 +6,8 @@ public partial class CreateAssignment : ContentPage
 	public CreateAssignment()
 	{
 		InitializeComponent();
-	}
+        BindingContext = App.schoolMan.SchoolInfo;
+    }
 
     private async void OnAddAssignmentClicked(object sender, EventArgs e)
     {
