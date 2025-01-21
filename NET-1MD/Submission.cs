@@ -16,7 +16,7 @@ namespace NET_1MD
             SubmissionTime = submissionTime;
             Score = score;
         }
-
+        public Submission() { } //xml my beloved please work
         public Assignment Assignment { get; set; }
         public Student Student { get; set; }
         public DateTime SubmissionTime { get; set; }

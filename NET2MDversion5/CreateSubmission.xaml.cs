@@ -6,36 +6,25 @@ using System.Collections.ObjectModel;
 
 public partial class CreateSubmission : ContentPage
 {
-	public CreateSubmission()
+    private Submission _submission;
+    public CreateSubmission()
 	{
 		InitializeComponent();
         BindingContext = App.schoolMan.SchoolInfo;
     }
 
+    public CreateSubmission(Submission submission) //added for editing
+    {
+        InitializeComponent();
+        _submission = submission;
+        SubmissionAssignment.SelectedItem = _submission.Assignment;
+        SubmissionStudent.SelectedItem = _submission.Student;
+        SubmissionTime.Date = _submission.SubmissionTime;
+        SubmissionScore.Text = _submission.Score.ToString();
+        CreateSubmissionBtn.Text = "Update Submission";
+    }
 
-
-    //protected override void OnAppearing() //allowed to delete if no work pls
-    //{
-    //    base.OnAppearing();
-
-    //    var students = App.schoolMan.getStudents();
-
-    //    foreach (var student in students)
-    //    {
-    //        students.Add(student);
-    //    }
-    //    SubmissionStudent.ItemsSource = students;
-
-        //SubmissionStudent.Items.Clear();
-
-        //var students = App.schoolMan.getStudents();
-        //foreach (var student in students)
-        //{
-        //    students.Add(student);
-        //}
-    //}
-
-    private async void OnAddSubmissionClicked(object sender, EventArgs e)
+    private async void OnAddSubmissionClicked(object sender, EventArgs e) //man ir LOTI daudz kluudu parbaudes, bet cerams taa nav slikta lieta
     {
         try
         {
@@ -53,36 +42,38 @@ public partial class CreateSubmission : ContentPage
                 return;
             }
             DateTime submissionTime = SubmissionTime.Date;
-            int score = int.Parse(SubmissionScore.Text);
-            if (int.TryParse(SubmissionScore.Text, out int result))
-            {
-                if (result < 0 || result > 10)
-                {
-                    await DisplayAlert("Error", "Score must be between 0 and 10", "Ok");
-                    return;
-                }
-            }
-            else
+
+            if (!int.TryParse(SubmissionScore.Text, out int score))
             {
                 await DisplayAlert("Error", "Score must be a number", "Ok");
                 return;
             }
+            if (score < 0 || score > 10)
+            {
+                await DisplayAlert("Error", "Score must be between 0 and 10", "Ok");
+                return;
+            }
 
-            App.schoolMan.addSubmission(assignment, student, submissionTime, score);
-            await DisplayAlert("Success", "Submission added successfully", "Ok");
-            await Navigation.PopAsync(); //view data
+            if (_submission == null) //adding
+            {
+                App.schoolMan.addSubmission(assignment, student, submissionTime, score);
+                await DisplayAlert("Success", "Submission added successfully", "Ok");
+            }
+            else //editing
+            {
+                _submission.Assignment = assignment;
+                _submission.Student = student;
+                _submission.SubmissionTime = submissionTime;
+                _submission.Score = score;
+                await DisplayAlert("Success", "Submission updated successfully", "Ok");
+                await Navigation.PopModalAsync();
+            }
+
+            await Navigation.PopAsync(); //prev page
         }
         catch (Exception ex)
         {
             await DisplayAlert("Error", $"Error adding submission: {ex.Message}", "Ok");
         }
     }
-
-    //NavigatedToEventArgs OnNavigatedTo(object sender, EventArgs e)
-    //{
-    //    var assignments = App.schoolMan.getAssignments();
-    //    var students = App.schoolMan.getStudents();
-    //    SubmissionAssignment.ItemsSource = assignments;
-    //    SubmissionStudent.ItemsSource = students;
-    //}
 }

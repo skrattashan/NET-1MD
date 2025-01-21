@@ -2,28 +2,49 @@ namespace NET2MDversion5;
 using NET_1MD;
 public partial class EditAssignment : ContentPage
 {
-	public EditAssignment()
+    private Assignment _assignment; //added assignment
+    public EditAssignment()
 	{
 		InitializeComponent();
-	}
+        AssignmentList.ItemsSource = App.schoolMan.SchoolInfo.Assignments;
+    }
 
-	private async void OnEditAssignmentClicked(object sender, EventArgs e)
-	{
-		try
-		{
-            // Use the editAssignment method to update assignment data
-            var assignment = (Assignment)BindingContext;
-            var deadline = AssignmentDate.Date;
-            var course = (Course)AssignmentCourse.SelectedItem;
-            var description = AssignmentDescription.Text;
+    private void RefreshList() //paldies pasniedzejai - sadi implementeet edit un delete funkcionalitati ir geniali (runa ir par visu datni)
+    {
+        AssignmentList.ItemsSource = null;
+        AssignmentList.ItemsSource = App.schoolMan.SchoolInfo.Assignments;
+    }
 
-            App.schoolMan.editAssignment(assignment, deadline, course, description);
-            await DisplayAlert("Success", "Assignment updated successfully", "Ok");
-            await Navigation.PopAsync(); // Navigate back
+    private async void AssignmentList_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        if (IsEditingChx.IsChecked)
+        {
+            //edit mode
+            if (AssignmentList.SelectedItem != null)
+            {
+                Assignment assignment = (Assignment)AssignmentList.SelectedItem;
+                await Navigation.PushModalAsync(new CreateAssignment(assignment));
+            }
         }
-		catch (Exception ex)
-		{
-			await DisplayAlert("Error", $"Error editing assignment: {ex.Message}", "Ok");
-		}
-	}
+        else
+        {
+            //delete mode
+            if (AssignmentList.SelectedItem != null)
+            {
+                Assignment assignment = (Assignment)AssignmentList.SelectedItem;
+                bool answer = await DisplayAlert("Delete", "Are you sure you want to delete this assignment? \n" + assignment.ToString(), "Yes", "No");
+                if (answer)
+                {
+                    App.schoolMan.SchoolInfo.Assignments.Remove(assignment);
+                    RefreshList();
+                }
+            }
+
+        }
+    }
+
+    private void ContentPage_Appearing(object sender, EventArgs e)
+    {
+        RefreshList();
+    }   
 }

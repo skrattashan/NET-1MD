@@ -94,46 +94,6 @@ namespace NET_1MD
         public int countAllCourses() { return Courses.Count; }
         public int countAllAssignments() { return Assignments.Count; }
         public int countAllSubmissions() { return Submissions.Count; }
-        //public void printAllStudents()
-        //{
-        //    Console.WriteLine("Students: ");
-        //    foreach (Student student in Students)
-        //    {
-        //        Console.WriteLine(student.ToString());
-        //    }
-        //}
-        //public void printAllTeachers()
-        //{
-        //    Console.WriteLine("Teachers: ");
-        //    foreach (Teacher teacher in Teachers)
-        //    {
-        //        Console.WriteLine(teacher.ToString());
-        //    }
-        //}
-        //public void printAllCourses()
-        //{
-        //    Console.WriteLine("Courses: ");
-        //    foreach (Course course in Courses)
-        //    {
-        //        Console.WriteLine(course.ToString());
-        //    }
-        //}
-        //public void printAllAssignments()
-        //{
-        //    Console.WriteLine("Assignments: ");
-        //    foreach (Assignment assignment in Assignments)
-        //    {
-        //        Console.WriteLine($"{assignment.ToString()}");
-        //    }
-        //}
-        //public void printAllSubmissions()
-        //{
-        //    Console.WriteLine("Submissions: ");
-        //    foreach (Submission submission in Submissions)
-        //    {
-        //        Console.WriteLine(submission.ToString());
-        //    }
-        //}
 
         public string printAllStudents() //parveidoju metodes, lai taas atgrieztu string un neprintetu konsolee (VS so visu automatiski piedavaja)
         {

@@ -4,36 +4,17 @@
              x:Class="NET2MDversion5.CreateAssignment"
              Title="CreateAssignment">
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout Padding="30,0" Spacing="25">
             <Label 
             Text="Add New Assignment" FontSize="Medium" />
             <Label Text="Pick Assignment date"/>
             <DatePicker x:Name="AssignmentDate" />
-            <!--            <Entry x:Name="AssignmentCourse" Placeholder="Course" /> -->
             <Picker x:Name="AssignmentCourse" Title="Select Course"
                     ItemsSource="{Binding Courses}" 
                     ItemDisplayBinding="{Binding Name}"/>
             <Label x:Name="TeacherLabel" Text="Teacher: " />
-
             <Entry x:Name="AssignmentDescription" Placeholder="Description" />
-            
-<!--            <Entry x:Name="TeacherName" Placeholder="Teacher Name" />
-            <Entry x:Name="TeacherSurname" Placeholder="Teacher Surname" />
-            <Picker x:Name="TeacherGender">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Man</x:String>
-                        <x:String>Woman</x:String>
-                        <x:String>Other</x:String>
-                        <x:String>Unknown</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker> 
-            <DatePicker x:Name="ContractDate" />
-            <TimePicker x:Name="ContractTime" /> -->
-            <Button Text="Add Assignment" Clicked="OnAddAssignmentClicked" />
+            <Button x:Name="AddAssignmentBtn" Text="Add Assignment" Clicked="OnAddAssignmentClicked" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

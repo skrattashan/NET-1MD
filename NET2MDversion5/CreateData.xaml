@@ -21,13 +21,7 @@
                 </Picker.ItemsSource>
             </Picker>
             <Entry x:Name="StudentIDNumber" Placeholder="Student ID" />
-            
             <Button Text="Add Student" Clicked="OnAddStudentClicked" />
-
-           <!-- <Entry x:Name="StudentCourse" Placeholder="Course" />
-            <Entry x:Name="StudentAssignment" Placeholder="Assignment" />
-          <Button Text="Add Assignment" Clicked="OnAddAssignmentClicked" />
-            <Button Text="Add Course" Clicked="OnAddCourseClicked" /> -->
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

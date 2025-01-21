@@ -10,38 +10,42 @@ public partial class CreateData : ContentPage
 	{
 		InitializeComponent();
     }
-	private schoolManager _schoolManager = App.schoolMan;
+	//private schoolManager _schoolManager = App.schoolMan;
 
 	private async void OnAddStudentClicked(object sender, EventArgs e)
     {
 		try
 		{
 			string name = StudentName.Text;
-            if (name == null)
+            if (string.IsNullOrWhiteSpace(name))
             {
                 await DisplayAlert("Error", "Please input student name", "Ok");
+                return;
             }
             string surname = StudentSurname.Text;
-            if (surname == null)
+            if (string.IsNullOrWhiteSpace(surname)) 
             {
                 await DisplayAlert("Error", "Please input student surname", "Ok");
+                return;
             }
-            Person.GenderType gender = (Person.GenderType)Enum.Parse(typeof(Person.GenderType), StudentGender.SelectedItem.ToString()); //*
             if (StudentGender.SelectedItem == null)
             {
-                await DisplayAlert("Error", "Please select a student gender", "Ok"); 
+                await DisplayAlert("Error", "Please select a student gender", "Ok");
+                return;
             }
+            Person.GenderType gender = (Person.GenderType)Enum.Parse(typeof(Person.GenderType), StudentGender.SelectedItem.ToString());
+
             string studentIdNumber = StudentIDNumber.Text;
-            if (studentIdNumber == null)
+            if (string.IsNullOrWhiteSpace(studentIdNumber))
             {
-                await DisplayAlert("Error", "Please input a student ID number", "Ok"); 
+                await DisplayAlert("Error", "Please input a student ID number", "Ok");
+                return;
             }
 
-            //var newStudent = new Student(name, surname, gender, studentIdNumber)
             App.schoolMan.addStudent(name, surname, gender, studentIdNumber);
             await DisplayAlert("Success", "Student added successfully", "Ok");
 
-            await Navigation.PopAsync(); //view data
+            await Navigation.PopAsync(); //prev page
         }
         catch (Exception ex)
         {

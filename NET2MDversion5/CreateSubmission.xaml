@@ -7,9 +7,7 @@
         <VerticalStackLayout Padding="30,0" Spacing="25">
             <Label 
                 Text="Add New Submission"
-                FontSize="Medium"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+                FontSize="Medium" />
             <Picker x:Name="SubmissionAssignment" Title="Select Assignment"
                     ItemsSource="{Binding Assignments}"
                     ItemDisplayBinding="{Binding Description}"/>
@@ -18,8 +16,7 @@
                     ItemDisplayBinding="{Binding FullName}"/>
             <DatePicker x:Name="SubmissionTime" />
             <Entry x:Name="SubmissionScore" Placeholder="Score" Keyboard="Numeric" />
-
-            <Button Text="Add Submission" Clicked="OnAddSubmissionClicked"/>
+            <Button x:Name="CreateSubmissionBtn" Text="Add Submission" Clicked="OnAddSubmissionClicked"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -10,7 +10,8 @@
             <Label
                 Text="Student data"
                 VerticalOptions="Center"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                FontSize="Medium" />
             <Button
                 x:Name="PrintBtn"
                 Text="Print Test Data"

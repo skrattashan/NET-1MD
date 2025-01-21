@@ -21,7 +21,7 @@ namespace NET_1MD
             Woman,
             [XmlEnum("Other")]
             Other,
-            [XmlEnum("Unknown")]
+            [XmlEnum("Unknown")] //nezinu, vai sim ir kada jega, bet bija problemas ar xml, tapec nu...
             Unknown
         }
         private GenderType _gender;

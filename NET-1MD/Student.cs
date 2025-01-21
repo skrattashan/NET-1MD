@@ -11,6 +11,8 @@ namespace NET_1MD
     {
         public string StudentIdNumber { get; set; }
 
+        public Student() { } //xml by beloved please work
+
         public Student(string name, string surname, GenderType gender, string StudentIDNumber) //šis konstruktors tika izstrādāts ar AI rīka palīdzību
         {
             Name = name;

@@ -9,6 +9,8 @@ namespace NET_1MD
     //5 UZD
     public class Assignment
     {
+        public Assignment() { } //parameterless constructor for serialization
+
         public Assignment(DateTime deadline, Course course, string description) //konstruktors, jo bija error (VS piedāvājo šo, kā labojumu)
         {
             Deadline = deadline;

@@ -22,17 +22,8 @@ namespace NET_1MD
         {
             get { return _schoolinfo; }
         }
-        //public void print()
-        //{
-        //    _schoolinfo.printAllStudents();
-        //    _schoolinfo.printAllTeachers();
-        //    _schoolinfo.countAllCourses();
-        //    _schoolinfo.printAllAssignments();
-        //    _schoolinfo.printAllSubmissions();
 
-        //}
-
-        public string print() //bisk izmainiju (VS automatiski piedavaja)
+        public string print() //mazliet izmainiju (VS automatiski piedavaja)
         {
             string result = _schoolinfo.printAllStudents();
             result += _schoolinfo.printAllTeachers();
@@ -41,28 +32,11 @@ namespace NET_1MD
             result += _schoolinfo.printAllSubmissions();
             return result;
         }
-        //public void save() //draugs ieteica izmantot XML
-        //{
-        //    try
-        //    {
-        //        XmlSerializer serializer = new XmlSerializer(typeof(SchoolInfo));
-        //        using (TextWriter writer = new StreamWriter("schooldata.xml"))
-        //        {
-        //            serializer.Serialize(writer, _schoolinfo);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error saving data: {ex.Message}");
-        //    }
-        //}
 
-        public void save(string filePath = @"C:\Temp\schooldata.xml")
+        public void save(string filePath = @"C:\Temp\schooldata.xml") //draugs ieteica izmantot xml
         {
             try
             {
-                //string filePath = @"C:\Temp\schooldata.xml";
-
                 string directoryPath = Path.GetDirectoryName(filePath);
                 if (!Directory.Exists(directoryPath))
                 {
@@ -77,7 +51,7 @@ namespace NET_1MD
 
                 Console.WriteLine($"Data saved successfully to {filePath}");
 
-                // Verify the file exists and contains data
+                // Verify the file exists and contains data - man bija problemas, tapec ir tik daudz mazliet bezjedzigu kludu parbauzu (visas parbaudes tika uzgeneretas ar AI riku)
                 if (File.Exists(filePath))
                 {
                     string fileContent = File.ReadAllText(filePath);
@@ -104,7 +78,6 @@ namespace NET_1MD
         {
             try
             {
-                //string filePath = @"C:\Temp\schooldata.xml";
                 if (File.Exists(filePath))
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(SchoolInfo));
@@ -124,16 +97,15 @@ namespace NET_1MD
                 Console.WriteLine($"Error loading data: {ex.Message}");
             }
         }
-        public void createTestData()
+        public void createTestData() //sis kods tika uzgenerets izmantojot AI riku
         {
             if (_schoolinfo == null) //initialize schoolinfo if it is null
             {
                 _schoolinfo = new SchoolInfo();
             }
-            //_schoolinfo = new SchoolInfo();
             var testData = SchoolInfo.GetTestData();
 
-            // Add students one by one
+            // Add students one by one - jo ObservableCollection nevar pievienot visu sarakstu uzreiz (diemzel)
             foreach (var student in testData.Students)
             {
                 _schoolinfo.Students.Add(student);
@@ -184,7 +156,6 @@ namespace NET_1MD
         public void addAssignment(DateTime deadline, Course course, string description) //jauna metode, kas lauj lietotajam pievienot jaunu Assignment schoolInfo
         {
             _schoolinfo.Assignments.Add(new Assignment(deadline, course, description));
-            //_schoolinfo.Assignments.ToString();
         }
         public void addSubmission(Assignment assignment, Student student, DateTime submissionDate, int score) //jauna metode, kas lauj lietotajam pievienot jaunu Submission schoolInfo
         {

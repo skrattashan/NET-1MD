@@ -9,7 +9,7 @@ namespace NET_1MD
     //8 UZD - viss uzdevums tika izstrādāts izmantojot AI rīka palīdzību
     public interface IDataManager
     {
-        string print(); //samainiju prieks 2md
+        string print(); //samainiju uz string prieks 2md
         void save(string filePath = @"C:\Temp\schooldata.xml");
         void load(string filePath = @"C:\Temp\schooldata.xml");
         void createTestData();
